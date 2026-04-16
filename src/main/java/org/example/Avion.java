@@ -34,6 +34,11 @@ public class Avion extends VehiculoAerero{
     }
 
     @Override
+    public void enviarMensaje(){
+        System.out.println("enviando mensaje a la torre de control, soy un avion");
+    }
+
+    @Override
     public String toString() {
         // Java 17 permite usar Optional para decidir si un String aparece o no
         //ofNullablle para Objetos/String --- of para tipos primitivos

@@ -88,8 +88,8 @@ public class Main {
         myDron.volar(955);
         myDron.aterrizar();
         //Hacemos un Casting (obligando a Java a mirar detrás de la máscara):
-        if (myDron instanceof Dron) {
-            Dron dronReal = (Dron) myDron; // Casting
+        if (myDron instanceof Dron dronReal) {
+            //Dron dronReal = (Dron) myDron; // Casting
             System.out.println("Haciendo un Casting te puedo mostrar mi numero de hélices: "+ dronReal.getCantidadHelices()); // ✅ Ahora sí funciona
         }
         System.out.println(myDron.toString());
@@ -97,13 +97,13 @@ public class Main {
 
 
         // El mismo método estático gestiona objetos totalmente distintos
-        GestorVehiculo.presentarVehiculo(miAvion);
+/*        GestorVehiculo.presentarVehiculo(miAvion);
         GestorVehiculo.presentarVehiculo(myHelicoptero);
         GestorVehiculo.presentarVehiculo(miDron);
         GestorVehiculo.presentarVehiculo((Vehiculo) myDron); //Casting necesario porque no es tipo Vehiculo, sino Flying (interface)
         GestorVehiculo.presentarVehiculo(miBici);
         GestorVehiculo.presentarVehiculo(myBici);
-
+*/
         //Otra manera de presentar lo mismo que arriba mediante una LIST
         // Polimorfismo: Una lista de 'Vehiculo' acepta cualquier tipo de Vehículo.
         List<Vehiculo> miFlota = List.of(miAvion,

@@ -47,7 +47,7 @@ public class BicicletaElectrica extends Bicicleta implements Cargable{
     @Override
     public String toString() {
         // Configuramos el prefijo y el delimitador
-        StringJoiner joiner = new StringJoiner(", ", "⚡ [BICI ELÉCTRICA] ", "");
+        StringJoiner joiner = new StringJoiner(", ", "[BICI ELÉCTRICA] ", "");
 
         // Agregamos solo si tienen contenido (no null y no vacío)
         if (getNombre() != null && !getNombre().isEmpty()) {

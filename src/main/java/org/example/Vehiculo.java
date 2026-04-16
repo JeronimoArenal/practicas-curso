@@ -12,10 +12,13 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder // Permite que las hijas hereden el Builder y pasarle sus datos a las clases hijas.
 //Al ser abstract no se puede instanciar, solo sirve para que otras hereden de ella
+//Si sus hij@s no implementan todos los métodos abstract debe declararse Abstract
 public abstract class Vehiculo {
     private String nombre;
     private String fabricante;
     private String modelo;
 
+
+    //............................... Methods .........................................
     public abstract void realizarAccionEspecial();
 }

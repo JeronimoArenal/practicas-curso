@@ -26,7 +26,7 @@ public class Helicoptero extends VehiculoAerero {
     public String toString() {
         // super.toString() llama al toString de VehiculoAereo
         // que a su vez llama al de Vehiculo (por el callSuper = true que hay allí)
-        return "🚁 [HELICÓPTERO] " + super.toString() + ", Rotores: " + cantidadRotores;
+        return "[HELICÓPTERO] " + super.toString() + ", Rotores: " + cantidadRotores;
     }
 
     @Override
