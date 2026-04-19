@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class EstructuraDatosArray {
 
     public static void main(String[] args) {
-        double data[];
+        double[] data;
         data = new double[10];
         data[4] = 35;
 
@@ -22,6 +22,9 @@ public class EstructuraDatosArray {
       // int[][] cuenta = new int[PAISES][MEDALLAS];
       // cuenta[0][0] = 0;
 
+        /*
+        Recorremos un Array bidimensional e imprimimos sus valores
+         */
         final int PAISES = 7;
         final int MEDALLAS = 3;
         int[][] cuenta = {{ 0, 0, 1 },
@@ -33,7 +36,7 @@ public class EstructuraDatosArray {
                 { 0, 2, 0 }
         };
 
-        for (int i = 0; i < cuenta.length; i++) {// Proceso fila ith. SUstituimos PAISES porcuenta.length
+        for (int i = 0; i < cuenta.length; i++) {// Proceso fila ith. SUstituimos PAISES por cuenta.length
             for (int j = 0; j < cuenta[i].length; j++) { // Procesa la jth columna en la fila ith. Sustituor MEDALLLAS po length
                 System.out.printf("%8d", cuenta[i][j]);
             }
@@ -41,35 +44,39 @@ public class EstructuraDatosArray {
         }
 
 
+        /*
+        Array bidimensiona de conches, imprimiendo valor de array, bucle con indices y valores de array con for-each
+         */
         String [][] coches = {
                 {"Audi", "BMW", "Seat"},
                 {"Renault", "Toyota", "Skoda", "Tesla"}
         };
         System.out.println(coches[1][3]); // Accedemos a un elemento
         System.out.println(coches.length); // Imprime 2 porque hay 2 arrays
+
         for(int i = 0; i < coches.length; i++){ // Iteramos sobre este array
             for(int j = 0; j < coches[i].length; j++) {
                 System.out.println("El coche en el índice " + i + "," + j + " es " + coches[i][j]);
             }
         }
 
-        // 1. El primer for-each recorre las filas (que son arrays de Strings)
-        for (String[] fila : coches) {
-            // 2. El segundo for-each recorre cada elemento de esa fila
-            for (String coche : fila) {
+        for (String[] fila : coches) {          // 1. El primer for-each recorre las filas (que son arrays de Strings)
+            for (String coche : fila) {         // 2. El segundo for-each recorre cada elemento de esa fila
                 System.out.println("Coche: " + coche);
             }
         }
 
-
-        //Rellenamos un array
+        /*
+        Relllenamos un Array
+         */
         int[] datos = new int[11];
         for (int i = 0; i < datos.length; i++) {
             datos[i] = i * i;
         }
-        System.out.println(Arrays.toString(datos));
+        System.out.println("Rellenando un array e imprimiendo con toString " + Arrays.toString(datos));
 
         //Incluimos separador para imprimir
+        System.out.print("Imprimimos el array rellenado con separador ");
         for (int i = 0; i < datos.length; i++) {
             if (i > 0) {
                 System.out.print(" | ");
@@ -78,6 +85,9 @@ public class EstructuraDatosArray {
         }
         System.out.println();
 
+        /*
+        Buscamos un valor en su posición
+         */
         int valorBuscado = 100;
         int pos = 0;
         boolean found = false;
@@ -88,9 +98,8 @@ public class EstructuraDatosArray {
             } else {
                 pos++;
             }
-        } // <--- AQUÍ cerramos el while
+        } // cerramos el while
 
-// El mensaje se muestra UNA SOLA VEZ, al terminar la búsqueda
         if (found) {
             System.out.println("Valor Hallado en la posicion: " + pos);
         } else {
