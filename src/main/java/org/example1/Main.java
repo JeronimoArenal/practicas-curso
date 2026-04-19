@@ -1,4 +1,4 @@
-package org.example.variables;
+package org.example1;
 
 import java.time.*;
 
@@ -18,12 +18,14 @@ public class Main {
 
         } */
 
-        fechora();
-        clascad();
-        prePost();
-        postPre();
-        buscarNombre();
+
+        //fechora();
+        //clascad();
+        //prePost();
+        //postPre();
+        //buscarNombre();
     }
+
 
     //Pizarra fecha y hora
     public static void fechora() {
@@ -134,4 +136,5 @@ public class Main {
             }
         }
     }
+
 }
