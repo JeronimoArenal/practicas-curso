@@ -19,11 +19,11 @@ public class Main {
         } */
 
 
-        //fechora();
-        //clascad();
-        //prePost();
-        //postPre();
-        //buscarNombre();
+        fechora();
+        clascad();
+        prePost();
+        postPre();
+        buscarNombre();
     }
 
 
