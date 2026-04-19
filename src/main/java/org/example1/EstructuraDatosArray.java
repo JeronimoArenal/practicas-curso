@@ -105,6 +105,34 @@ public class EstructuraDatosArray {
         } else {
             System.out.println("No encontrado");
         }
+
+        /*
+        Ordenacion de un Array (método burbuja)
+         */
+        int [] arr = {5,2,7,1,98,1000,1};
+        burbuja(arr);                       // arr: 1,1,2,5,7,98,1000
+        for(int i = 0; i < arr.length; i++){
+            System.out.println(arr[i]);
+        }
     }
+
+    /*
+    Método Burbuja
+     */
+    static void burbuja (int[] arr){
+        int n = arr.length;                        // Guardamos la longitud en n que nos permite hacer el código más limpio
+
+        for(int i = 0; i < n; i++){                // Por cada elemento recorremos el array entero
+            for(int j = 1; j < (n-i); j++){
+                if(arr[j-1] > arr[j]){             // cambiamos los elementos
+                    int temp = arr[j-1];           // Guardamos un elemento en una variable
+                    arr[j-1] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+    }
+
+
 
 }
