@@ -31,7 +31,7 @@ public class EstructuraDatosArray {
                 { 0, 2, 0 }
         };
 
-        for (int i = 0; i < cuenta.length.; i++) {// Proceso fila ith. SUstituimos PAISES porcuenta.length
+        for (int i = 0; i < cuenta.length; i++) {// Proceso fila ith. SUstituimos PAISES porcuenta.length
             for (int j = 0; j < cuenta[i].length; j++) { // Procesa la jth columna en la fila ith. Sustituor MEDALLLAS po length
                 System.out.printf("%8d", cuenta[i][j]);
             }
