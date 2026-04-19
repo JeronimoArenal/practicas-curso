@@ -1,5 +1,7 @@
 package org.example1;
 
+import java.util.Arrays;
+
 public class EstructuraDatosArray {
 
     public static void main(String[] args) {
@@ -53,11 +55,46 @@ public class EstructuraDatosArray {
 
         // 1. El primer for-each recorre las filas (que son arrays de Strings)
         for (String[] fila : coches) {
-
             // 2. El segundo for-each recorre cada elemento de esa fila
             for (String coche : fila) {
                 System.out.println("Coche: " + coche);
             }
+        }
+
+
+        //Rellenamos un array
+        int[] datos = new int[11];
+        for (int i = 0; i < datos.length; i++) {
+            datos[i] = i * i;
+        }
+        System.out.println(Arrays.toString(datos));
+
+        //Incluimos separador para imprimir
+        for (int i = 0; i < datos.length; i++) {
+            if (i > 0) {
+                System.out.print(" | ");
+            }
+            System.out.print(datos[i]);
+        }
+        System.out.println();
+
+        int valorBuscado = 100;
+        int pos = 0;
+        boolean found = false;
+
+        while (pos < datos.length && !found) {
+            if (datos[pos] == valorBuscado) {
+                found = true;
+            } else {
+                pos++;
+            }
+        } // <--- AQUÍ cerramos el while
+
+// El mensaje se muestra UNA SOLA VEZ, al terminar la búsqueda
+        if (found) {
+            System.out.println("Valor Hallado en la posicion: " + pos);
+        } else {
+            System.out.println("No encontrado");
         }
     }
 
