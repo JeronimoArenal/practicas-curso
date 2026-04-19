@@ -98,7 +98,7 @@ public class EstructuraDatosArray {
             } else {
                 pos++;
             }
-        } // cerramos el while
+        }
 
         if (found) {
             System.out.println("Valor Hallado en la posicion: " + pos);
