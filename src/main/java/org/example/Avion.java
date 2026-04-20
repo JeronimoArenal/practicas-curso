@@ -34,7 +34,7 @@ public class Avion extends VehiculoAerero{
     }
 
     @Override
-    public void enviarMensaje(){
+    protected void enviarMensaje(){
         System.out.println("enviando mensaje a la torre de control, soy un avion");
     }
 

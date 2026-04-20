@@ -8,7 +8,7 @@ import lombok.experimental.SuperBuilder;
 @Getter @Setter
 @NoArgsConstructor
 @SuperBuilder
-public class BicicletaCarrera extends Bicicleta {
+public final class BicicletaCarrera extends Bicicleta {
     private double anchoNeumatico;
 
     //............................... Methods .........................................

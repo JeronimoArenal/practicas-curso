@@ -10,7 +10,7 @@ import java.util.StringJoiner;
 @Getter @Setter
 //@NoArgsConstructor // NO se puede utilizar con "final" escepto qye le demos un valor
 @SuperBuilder
-public class BicicletaElectrica extends Bicicleta implements Cargable{
+public final class BicicletaElectrica extends Bicicleta implements Cargable{
     private int nivelBateria;
     private final String modeloMotor;
 

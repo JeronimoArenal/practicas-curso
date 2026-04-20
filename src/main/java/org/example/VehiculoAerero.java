@@ -17,7 +17,7 @@ public abstract class VehiculoAerero extends Vehiculo implements Flying{
 
     //............................... Methods .........................................
     @Override
-    public void realizarAccionEspecial() {
+    public final void realizarAccionEspecial() {
         // Definimos la secuencia estándar para cualquier cosa que vuele
         this.enviarMensaje();
         this.despegar();   // Método de la interfaz Flying
@@ -31,7 +31,7 @@ public abstract class VehiculoAerero extends Vehiculo implements Flying{
         System.out.println(getNombre() + " volando a " + altitud + " metros.");
     }
 
-    public void enviarMensaje(){
+    protected void enviarMensaje(){
         System.out.println("enviando mensaje a la torre de control");
     }
 }

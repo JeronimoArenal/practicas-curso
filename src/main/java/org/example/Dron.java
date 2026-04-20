@@ -9,7 +9,7 @@ import java.util.StringJoiner;
 @NoArgsConstructor
 //@ToString(callSuper = true)
 @SuperBuilder
-public class Dron extends VehiculoAerero implements Cargable{
+public final class Dron extends VehiculoAerero implements Cargable{
     private int cantidadHelices;
     private int nivelBateria;
 

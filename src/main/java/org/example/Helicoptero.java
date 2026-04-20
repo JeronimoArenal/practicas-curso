@@ -6,7 +6,7 @@ import lombok.experimental.SuperBuilder;
 
 @Getter @Setter
 @SuperBuilder
-public class Helicoptero extends VehiculoAerero {
+public final class Helicoptero extends VehiculoAerero {
     private int cantidadRotores;
 
 
@@ -23,14 +23,20 @@ public class Helicoptero extends VehiculoAerero {
     }
 
     @Override
+    protected void enviarMensaje() {
+        super.enviarMensaje(); // Llamamos al motodo de la clase padre, para que lo imprima.
+        System.out.println("Identificación de helicóptero confirmada.");
+    }
+
+    @Override
     public String toString() {
         // super.toString() llama al toString de VehiculoAereo
         // que a su vez llama al de Vehiculo (por el callSuper = true que hay allí)
         return "[HELICÓPTERO] " + super.toString() + ", Rotores: " + cantidadRotores;
     }
 
-    @Override
+ /*   @Override ALL poner final en VehiculoAereo se delega la responsabilidad en este
     public void realizarAccionEspecial() {
         this.despegar(); // El helicóptero sabe que su acción es despegar
-    }
+    } */
 }
