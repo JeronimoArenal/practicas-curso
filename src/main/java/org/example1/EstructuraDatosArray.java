@@ -1,119 +1,114 @@
 package org.example1;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class EstructuraDatosArray {
 
     public static void main(String[] args) {
-        double[] data;
-        data = new double[10];
-        data[4] = 35;
+        // 1. Ejemplo con double y búsqueda de índice
+        ejemploDouble();
 
+        // 2. Manejo de medallas (Array bidimensional)
+        mostrarMedallas();
+
+        // 3. Manejo de coches (Array bidimensional con for-each)
+        mostrarCoches();
+
+        // 4. Rellenar, imprimir y buscar en array de enteros
+        int[] datos = generarArrayCuadrados();
+        imprimirConSeparador(datos);
+        buscarValor(datos, 100);
+
+        // 5. Ordenación por burbuja
+        ordenarYMostrar();
+
+        // 1. Suma de elementos
+        int suma = MyExercices.sumElements(datos);
+        System.out.println("La suma de los elementos es: " + suma);
+
+        // 2. Promedio elementos
+        int media = MyExercices.averageElements(datos);
+        System.out.println("La media de los cuadrados es: " + media);
+
+        ArrayList<Integer> listaNumeros = new ArrayList<>();
+        listaNumeros.add(10);
+        listaNumeros.add(20);
+        listaNumeros.add(30);
+
+        //Llamando a ArrayList
+        int mediaLista = MyExercices.averageElements(listaNumeros);
+        System.out.println("La media de la lista del ArrayList es: " + mediaLista);
+    }
+
+    static void ejemploDouble() {
+        double[] data = new double[10];
+        data[4] = 35;
         for (int i = 0; i < data.length; i++) {
             if (data[i] == 35) {
-                // Aquí imprimimos la 'i', que es el índice donde está el 35
                 System.out.println("El valor 35 se encuentra en el índice: " + i);
-                System.out.println("Imprimimos el valor del array 4 " + data[i]);
             }
         }
+    }
 
-      // final int PAISES = 7;
-      // final int MEDALLAS = 3;
-      // int[][] cuenta = new int[PAISES][MEDALLAS];
-      // cuenta[0][0] = 0;
-
-        /*
-        Recorremos un Array bidimensional e imprimimos sus valores
-         */
-        final int PAISES = 7;
-        final int MEDALLAS = 3;
-        int[][] cuenta = {{ 0, 0, 1 },
-                { 0, 1, 1 },
-                { 1, 0, 0 },
-                { 3, 0, 1 },
-                { 0, 1, 0 },
-                { 0, 0, 1 },
-                { 0, 2, 0 }
+    static void mostrarMedallas() {
+        int[][] cuenta = {
+                { 0, 0, 1 }, { 0, 1, 1 }, { 1, 0, 0 }, { 3, 0, 1 },
+                { 0, 1, 0 }, { 0, 0, 1 }, { 0, 2, 0 }
         };
-
-        for (int i = 0; i < cuenta.length; i++) {// Proceso fila ith. SUstituimos PAISES por cuenta.length
-            for (int j = 0; j < cuenta[i].length; j++) { // Procesa la jth columna en la fila ith. Sustituor MEDALLLAS po length
+        for (int i = 0; i < cuenta.length; i++) {
+            for (int j = 0; j < cuenta[i].length; j++) {
                 System.out.printf("%8d", cuenta[i][j]);
             }
-            System.out.println(); // Cambio línea al final de la fila
+            System.out.println();
         }
+    }
 
-
-        /*
-        Array bidimensiona de conches, imprimiendo valor de array, bucle con indices y valores de array con for-each
-         */
-        String [][] coches = {
+    static void mostrarCoches() {
+        String[][] coches = {
                 {"Audi", "BMW", "Seat"},
                 {"Renault", "Toyota", "Skoda", "Tesla"}
         };
-        System.out.println(coches[1][3]); // Accedemos a un elemento
-        System.out.println(coches.length); // Imprime 2 porque hay 2 arrays
-
-        for(int i = 0; i < coches.length; i++){ // Iteramos sobre este array
-            for(int j = 0; j < coches[i].length; j++) {
-                System.out.println("El coche en el índice " + i + "," + j + " es " + coches[i][j]);
-            }
-        }
-
-        for (String[] fila : coches) {          // 1. El primer for-each recorre las filas (que son arrays de Strings)
-            for (String coche : fila) {         // 2. El segundo for-each recorre cada elemento de esa fila
+        for (String[] fila : coches) {
+            for (String coche : fila) {
                 System.out.println("Coche: " + coche);
             }
         }
+    }
 
-        /*
-        Relllenamos un Array
-         */
+    static int[] generarArrayCuadrados() {
         int[] datos = new int[11];
         for (int i = 0; i < datos.length; i++) {
             datos[i] = i * i;
         }
-        System.out.println("Rellenando un array e imprimiendo con toString " + Arrays.toString(datos));
+        System.out.println("Array generado: " + Arrays.toString(datos));
+        return datos;
+    }
 
-        //Incluimos separador para imprimir
-        System.out.print("Imprimimos el array rellenado con separador ");
+    static void imprimirConSeparador(int[] datos) {
+        System.out.print("Array con separador: ");
         for (int i = 0; i < datos.length; i++) {
-            if (i > 0) {
-                System.out.print(" | ");
-            }
+            if (i > 0) System.out.print(" | ");
             System.out.print(datos[i]);
         }
         System.out.println();
+    }
 
-        /*
-        Buscamos un valor en su posición
-         */
-        int valorBuscado = 100;
+    static void buscarValor(int[] datos, int valorBuscado) {
         int pos = 0;
         boolean found = false;
-
         while (pos < datos.length && !found) {
-            if (datos[pos] == valorBuscado) {
-                found = true;
-            } else {
-                pos++;
-            }
+            if (datos[pos] == valorBuscado) found = true;
+            else pos++;
         }
+        if (found) System.out.println("Valor " + valorBuscado + " hallado en posición: " + pos);
+        else System.out.println("Valor no encontrado");
+    }
 
-        if (found) {
-            System.out.println("Valor Hallado en la posicion: " + pos);
-        } else {
-            System.out.println("No encontrado");
-        }
-
-        /*
-        Ordenacion de un Array (método burbuja)
-         */
-        int [] arr = {5,2,7,1,98,1000,1};
-        burbuja(arr);                       // arr: 1,1,2,5,7,98,1000
-        for(int i = 0; i < arr.length; i++){
-            System.out.println(arr[i]);
-        }
+    static void ordenarYMostrar() {
+        int[] arr = {5, 2, 7, 1, 98, 1000, 1};
+        burbuja(arr);
+        System.out.println("Array ordenado: " + Arrays.toString(arr));
     }
 
     /*
@@ -132,6 +127,10 @@ public class EstructuraDatosArray {
             }
         }
     }
+
+
+
+
 
 
 
