@@ -4,6 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
         // --- SECCIÓN DE USUARIOS ---
+        //Creamos objeto para tener acceso a todos los metodos de la  interface IUserService, no a los que estan en la claseUserServiceIMpl
         IUserService userService = new UserServiceImpl();
 
         try {

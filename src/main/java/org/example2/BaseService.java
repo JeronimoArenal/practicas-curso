@@ -1,9 +1,6 @@
 package org.example2;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 //Genéricos con restricciones:  (<T extends Base>), Gracias a T, esta lógica funciona igual para un Usuario que para un Producto.
 public abstract class BaseService<T extends Base> implements IBaseService<T> {
@@ -40,6 +37,14 @@ public abstract class BaseService<T extends Base> implements IBaseService<T> {
         return entity;
     }
 
+    //Utilizamos optional en vez de la exception del metodo de arriba
+/*    @Override
+    public Optional<T> findById(Long id) {
+        // ofNullable crea un Optional con el objeto,
+        // o un Optional.empty() si storage.get(id) devuelve null.
+        return Optional.ofNullable(storage.get(id));
+    }
+*/
     @Override
     public List<T> findAll() {
         return new ArrayList<>(storage.values());

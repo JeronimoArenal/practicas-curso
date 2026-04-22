@@ -12,4 +12,17 @@ public class UserServiceImpl extends BaseService<User> implements IUserService{
             System.out.println("Usuario no encontrado.");
         }
     }
+
+    //Válido para Optional
+/*    public void printUserEmail(Long id) {
+        Optional<User> userOptional = findById(id);
+
+        if (userOptional.isPresent()) {
+            User u = userOptional.get(); // Sacamos al usuario de la caja
+            System.out.println("Email del usuario: " + u.getEmail());
+        } else {
+            System.out.println("Usuario no encontrado.");
+        }
+    }
+ */
 }
