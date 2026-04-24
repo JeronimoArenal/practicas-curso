@@ -1,15 +1,13 @@
 package org.example3;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalTime;
 
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Flight implements Comparable<Flight> {
     private String code;
     private String origin;
