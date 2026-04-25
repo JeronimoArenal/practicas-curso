@@ -1,5 +1,6 @@
 package org.example3;
 
+import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -35,7 +36,7 @@ public class AirportServiceImpl implements IAirportService {
                     " sale de " + flight.getOrigin() + " y no puede operar en " + this.localOrigin);
         }
 
-        if (flight.getDepartureTime().isBefore(java.time.LocalTime.now())) {
+        if (flight.getDepartureTime().isBefore(LocalTime.now())) {
             throw new AirportException("ERROR: La hora ya ha pasado.");
         }
 
@@ -50,7 +51,7 @@ public class AirportServiceImpl implements IAirportService {
         return this.localOrigin;
     }
 
-    @Override
+/*    @Override
     public Collection<Flight> getFlightsByOrigin(String origin) {
         // Ejemplo de uso de Streams para filtrar colecciones
         return flightStorage.values().stream()
@@ -58,7 +59,7 @@ public class AirportServiceImpl implements IAirportService {
                 .toList();      //Sustituimos esto .collect(Collectors.toList());
         //.collect(Collectors.toSet()); // Ahora devuelve un HashSet en vez de ArrayList
     }
-
+*/
     @Override
     public Collection<Flight> getLocalFlights() {
         // Usamos el origen que guardamos en el constructor (localOrigin) para filtrar automáticamente todos los vuelos
@@ -89,7 +90,7 @@ public class AirportServiceImpl implements IAirportService {
                 .flatMap(Set::stream)      // 3. ¡Clave! "Aplana" los Sets en un solo chorro de pasajeros
                 .filter(p -> p.getName().toLowerCase().contains(nameQuery.toLowerCase())) // 4. Filtramos
                 .distinct()                // 5. Por si un pasajero está en dos vuelos (gracias al EqualsAndHashCode)
-                .collect(Collectors.toList()); // 6. Lo metemos en una lista (polimorfismo de salida)
+                .toList(); // 6. Lo metemos en una lista (polimorfismo de salida)
     }
 
     // Esta es la mejor opción en Java moderno con removeIf
@@ -134,7 +135,7 @@ public class AirportServiceImpl implements IAirportService {
 
     @Override
     public void releaseGate(int gateNumber) {
-        Flight f = gates.remove(gateNumber); // El Map elimina la entrada y nos devuelve el objeto
+        Flight f = gates.remove(gateNumber);        // El Map elimina la entrada y nos devuelve el objeto
         if (f != null) {
             System.out.println("LOG: La puerta " + gateNumber + " ha quedado libre.");
         }
