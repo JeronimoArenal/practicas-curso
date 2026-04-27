@@ -22,8 +22,7 @@ public class App {
         TraversingCollection.iteratorOneCondition(new ArrayList<>(listaDePersonas));	//Se la pasamos al método del iterador
         TraversingCollection.iteratorSeveralConditions(new ArrayList<>(listaDePersonas));
         TraversingCollection.eliminarMujeres(new ArrayList<>(listaDePersonas));
-        PredicateExercices.ejemploPredicate(new ArrayList<>(listaDePersonas));
-
+        LambdaExercices.ejemploLambda(new ArrayList<>(listaDePersonas));
 
     }
 

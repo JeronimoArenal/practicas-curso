@@ -1,9 +1,8 @@
 package org.exampleClase;
 
 import java.util.List;
-import java.util.function.Predicate;
 
-public class PredicateExercices {
+public class LambdaExercices {
 
 
     /**
@@ -15,11 +14,12 @@ public class PredicateExercices {
      *
      * Es un método anónimo, que por lo genral se utilizan para implmentar el método abstracto de las Interfaces Funcionales.
      * Tanto las clases anónimas como las expresiones lambda sollamente se pueden relacionar con variables locales que sean
-     * explicitamente final.
+     * explicitamente final. Es decir que no se pude cambiar el valor de las variables declaradas.
      *
      */
-    //............................. iteratorSeveralConditions ........................
-    public static void ejemploPredicate(List<Persona> personas) {
+
+    //............................. ejemplo lambda ........................
+    public static void ejemploLambda(List<Persona> personas) {
         personas.stream()
                 .filter(p -> p.genero().equals(Genero.FEMENINO))
                 .forEach(System.out::println);
