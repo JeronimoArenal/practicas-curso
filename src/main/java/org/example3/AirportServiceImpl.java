@@ -1,18 +1,21 @@
 package org.example3;
 
+import lombok.AllArgsConstructor;
+
 import java.time.LocalTime;
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.function.Predicate;
 
+@AllArgsConstructor
 public class AirportServiceImpl implements IAirportService {
+
     private final String localOrigin;
 
-    // Constructor para asignar el nombre al crear el servicio
+ /*   //.................... Constructor ........................................
     public AirportServiceImpl(String localOrigin) {
         this.localOrigin = localOrigin;
     }
-
-
+*/
     // 1. Almacén de vuelos: Clave = Código de vuelo, Valor = Objeto Vuelo
     // Usamos Map para encontrar un vuelo instantáneamente sin recorrer una lista.
     private final Map<String, Flight> flightStorage = new HashMap<>();
@@ -28,6 +31,7 @@ public class AirportServiceImpl implements IAirportService {
     private final Queue<Flight> departureQueue = new PriorityQueue<>();
 
 
+    //................................ Añadir vuelos ...........................................
     @Override
     public void addFlight(Flight flight) throws AirportException {
         // NUEVA REGLA: Si no sale de aquí, no se registra
@@ -60,14 +64,28 @@ public class AirportServiceImpl implements IAirportService {
         //.collect(Collectors.toSet()); // Ahora devuelve un HashSet en vez de ArrayList
     }
 */
+    /*
+    "Coge todos los vuelos que tenemos guardados, quédate solamente con aquellos cuyo origen sea igual al origen de este aeropuerto
+    (sin importar las mayúsculas) y dame el resultado en una lista cerrada (inmutable)."
+     */
+    //............................ Obtener vuelos locales dependiendo del aeropuerto ..............................
     @Override
     public Collection<Flight> getLocalFlights() {
         // Usamos el origen que guardamos en el constructor (localOrigin) para filtrar automáticamente todos los vuelos
         return flightStorage.values().stream()
                 .filter(f -> f.getOrigin().equalsIgnoreCase(this.localOrigin))
-                .toList();      //Sustituimos esto .collect(Collectors.toList());
+                .toList();      //Sustituimos esto .collect(Collectors.toList()) que es una lista mutable;
     }
 
+    //.......................... Buscar Vuelos ................................................
+    // Este método ahora es genérico: tú le pasas la "regla" de búsqueda
+    public List<Flight> buscarVuelos(Predicate<Flight> filtro) {
+        return flightStorage.values().stream()
+                .filter(filtro) // Aquí aplicamos la lambda que recibimos
+                .toList();
+    }
+
+    //.............................. Registrar pasajeros ..............................
     @Override
     public void registerPassenger(String flightCode, Passenger passenger) {
         if (!flightStorage.containsKey(flightCode)) {
@@ -78,11 +96,13 @@ public class AirportServiceImpl implements IAirportService {
         passengerManifests.get(flightCode).add(passenger);
     }
 
+    //............................. Obtener listado completo de pasajeros ...............................
     @Override
     public Map<String, Set<Passenger>> getFullManifest() {
         return Collections.unmodifiableMap(passengerManifests);
     }
 
+    //..................... Buscar pasajeros por nombre .....................................
     @Override
     public Collection<Passenger> searchPassengersByName(String nameQuery) {
         return passengerManifests.values() // 1. Obtenemos todos los Set<Passenger> (Collection de Sets)
@@ -90,9 +110,10 @@ public class AirportServiceImpl implements IAirportService {
                 .flatMap(Set::stream)      // 3. ¡Clave! "Aplana" los Sets en un solo chorro de pasajeros
                 .filter(p -> p.getName().toLowerCase().contains(nameQuery.toLowerCase())) // 4. Filtramos
                 .distinct()                // 5. Por si un pasajero está en dos vuelos (gracias al EqualsAndHashCode)
-                .toList(); // 6. Lo metemos en una lista (polimorfismo de salida)
+                .toList();                  // 6. Lo metemos en una lista (polimorfismo de salida)
     }
 
+    //...........................Obtener próximos vuelos en salir ............................
     // Esta es la mejor opción en Java moderno con removeIf
     @Override
     public Optional<Flight> getNextFlightToDepart() {
@@ -113,6 +134,7 @@ public class AirportServiceImpl implements IAirportService {
         return Optional.ofNullable(flight);
     }
 
+    //................................ Asignar puertas ...................................
     @Override
     public void assignGate(int gateNumber, String flightCode) {
         Flight f = flightStorage.get(flightCode);
@@ -133,6 +155,7 @@ public class AirportServiceImpl implements IAirportService {
         System.out.println("Vuelo " + flightCode + " asignado a Puerta " + gateNumber);
     }
 
+    //................................ Liberar puertas ................................
     @Override
     public void releaseGate(int gateNumber) {
         Flight f = gates.remove(gateNumber);        // El Map elimina la entrada y nos devuelve el objeto
@@ -141,6 +164,7 @@ public class AirportServiceImpl implements IAirportService {
         }
     }
 
+    //................... Obtener el estado de la puerta .........................................
     @Override
     public Map<Integer, Flight> getGateStatus() {
         // Devolvemos el Map para que el cliente vea el estado

@@ -25,6 +25,8 @@ public class App {
         LambdaExercices.ejemploLambda(new ArrayList<>(listaDePersonas));
         LambdaExercices.ejemploLambda1(LambdaExercices.listaInmutable);
         LambdaExercices.ejemploLambdaCompareTo(new ArrayList<>(listaDePersonas));
+        LambdaExercices.ordenarPorNacimiento(new ArrayList<>(listaDePersonas));
+        LambdaExercices.ordenarPorNacimientoDirecto(new ArrayList<>(listaDePersonas));
 
     }
 
@@ -169,22 +171,22 @@ public class App {
 
 
     /**
-     * Las operaciones de agregado implican convertir la coleccion en un flujo (stream) de elementos que al circular por una
-     * tuberia imaginaria o pipeline se entiende una secuencia de metodos  de la clase Stream, es decir una secuencia
-     * de operaciones de agregado, es decir, métodos para obtener un resultado agrupado de elementos del fllujo
+     * Las operaciones de agregado implican convertir la colección en un flujo (stream) de elementos que al circular por una
+     * tubería imaginaria o pipeline se entiende una secuencia de métodos  de la clase Stream, es decir una secuencia
+     * de operaciones de agregado, es decir, métodos para obtener un resultado agrupado de elementos del flujo
      *
-     * una tuberia o pipeline, tiene un origen  que puede ser un array, una coleccion un socket, un fichero, una consullta a Db, etc
-     * tambien la tuberiaa tiene cero, una o muchas operaciones intermedia y UNA SOLA operación.
+     * una tuberia o pipeline, tiene un origen  que puede ser un array, una colección un socket, un fichero, una consulta a DB, etc
+     * también la tubería tiene cero, una o muchas operaciones intermedias y UNA SOLA operación.
      *
-     * LLo primero es utilizar ell método stream(), que tambien podria ser parallelStream(), para convertir lla coleccion en un flujo
-     * de elementos del mismo tipo de la coleccion
+     * Lo primero es utilizar el método stream(), que tambien podria ser parallelStream(), para convertir la colección en un flujo
+     * de elementos del mismo tipo de la colección
      *
-     * A artir de tener un flujo de elementos entran a funcionar los métodos de la clase Stream, operaciones intermedias,
-     * como podria ser el metodo .filter para permitor  que solmanete circule e próximo nivell de lla tubería las personas del
+     * A partir de tener un flujo de elementos entran a funcionar los métodos de la clase Stream, operaciones intermedias,
+     * como podría ser el método .filter para permitir  que sólamente circule el próximo nivel de la tubería las personas del
      * género Mujer.
      *
-     * Predicate es una interface funcional, es decir un tipo de interface que puede tener metodos por defecto, pero
-     * SOLAMENTE UN METODO ABSTRACTO. Un predicate es una condicion que tiene que cumplir un elemento que circula por la
+     * Predicate es una interface funcional, es decir un tipo de interface que puede tener métodos por defecto, pero
+     * SOLAMENTE UN METODO ABSTRACTO. Un predicate es una condición que tiene que cumplir un elemento que circula por la
      * pipeline(tubería)
      *
      *
@@ -193,4 +195,5 @@ public class App {
      * de clase.
      * Se puede utilizar para instanciar un objeto a partir de una interface o una clase abstracta.
      */
+
 }

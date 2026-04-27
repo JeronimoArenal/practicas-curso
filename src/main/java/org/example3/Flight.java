@@ -32,10 +32,9 @@ public class Flight implements Comparable<Flight> {
     /** En caso de querer ordenar solo por prioridad
      *     @Override
      *     public int compareTo(Flight other) {
-     *         return Integer.compare(this.priority.getLevel(), other.priority.getLevel());      // Compara por el nivel numérico del Enum
+     *         return Integer.compare(this.priority.getLevel(), other.priority.getLevel());    // Compara por el nivel numérico del Enum
      *     }
      */
-
 
     /** En caso de querer ordenar por hora de Salida
      * @Override

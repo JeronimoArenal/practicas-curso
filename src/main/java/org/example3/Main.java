@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Main {
 
     public static void main(String[] args) {
+        //Quiero un servicio de aeropuerto que cumpla el contrato IAirportService
         IAirportService airport = new AirportServiceImpl("Madrid");
 
         // --- 1. PREPARACIÓN DE DATOS  ---
@@ -19,11 +21,15 @@ public class Main {
                         .priority(FlightPriority.NORMAL).departureTime(LocalTime.of(22, 30)).build(),
 
                 Flight.builder().code("IBE456").origin("Madrid").destination("Londres")
-                        .priority(FlightPriority.NORMAL).departureTime(LocalTime.of(23, 30)).build(), // Fallará por hora
+                        .priority(FlightPriority.NORMAL).departureTime(LocalTime.of(23, 30)).build(),
+
+                Flight.builder().code("EMG-999").origin("Madrid").destination("Ibiza")
+                        .priority(FlightPriority.EMERGENCY).departureTime(LocalTime.of(21, 30)).build(),
 
                 Flight.builder().code("EMG-999").origin("Barcelona").destination("Ibiza")
                         .priority(FlightPriority.EMERGENCY).departureTime(LocalTime.of(22, 30)).build() // Fallará por origen
         );
+
 
         // Se puede usar el método .add() fuera de la declaración inicial siempre que se utilice ArrayList<>
     /*    vuelosNuevos.add(
@@ -83,6 +89,23 @@ public class Main {
         airport.getLocalFlights().forEach(f -> System.out.println(" - " + f.getCode() + " destino " + f.getDestination()));
 
 
+        // --- 3.1 BÚSQUEDA DINÁMICA CON PREDICADOS (Lógica Flexible) ---
+        System.out.println("\n=== 2.1 BÚSQUEDA PERSONALIZADA (PREDICATE) ===");
+
+        // Caso 1: Queremos ver vuelos "Tardíos" (después de las 22:00)
+        System.out.println("Vuelos programados para tarde/noche:");
+        airport.buscarVuelos(f -> f.getDepartureTime().isAfter(LocalTime.of(22, 0)))
+                .forEach(f -> System.out.println(" - " + f.getCode() + " hora: " + f.getDepartureTime()));
+
+        // Caso 2: Combinar condiciones (Destino y Prioridad)
+        Predicate<Flight> alertaTokio = f -> f.getDestination().equalsIgnoreCase("Tokio");
+        Predicate<Flight> esUrgente = f -> f.getPriority().getLevel() <= 2;
+
+        System.out.println("\nVuelos con destino Tokio o Urgentes:");
+        airport.buscarVuelos(alertaTokio.or(esUrgente))
+                .forEach(f -> System.out.println(" - " + f.getCode() + " [" + f.getPriority() + "] a " + f.getDestination()));
+
+
         System.out.println("\n=== 2. PROCESAMIENTO DE PASAJEROS ===");
         airport.getFullManifest().forEach((vuelo, pasajeros) ->
                 System.out.println("Vuelo " + vuelo + ": " + pasajeros.size() + " pasajeros registrados.")
@@ -121,6 +144,7 @@ public class Main {
                                 + " [ID: " + p.getPassport() + "]"));
             });
         }
+
         // --- 4. LOGÍSTICA DE TIERRA (PUERTAS) ---
         System.out.println("\n=== 3. ASIGNACIÓN DE PUERTAS AUTOMÁTICA ===");
         int numeroPuerta = 1;
