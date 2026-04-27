@@ -23,8 +23,8 @@ public class App {
         TraversingCollection.iteratorSeveralConditions(new ArrayList<>(listaDePersonas));
         TraversingCollection.eliminarMujeres(new ArrayList<>(listaDePersonas));
         LambdaExercices.ejemploLambda(new ArrayList<>(listaDePersonas));
-       // LambdaExercices.ejemploLambda1(LambdaExercices.listaInmutable);
-        LambdaExercices.ejemploLambda2(new ArrayList<>(listaDePersonas));
+        LambdaExercices.ejemploLambda1(LambdaExercices.listaInmutable);
+        LambdaExercices.ejemploLambdaCompareTo(new ArrayList<>(listaDePersonas));
 
     }
 

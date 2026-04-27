@@ -1,5 +1,6 @@
 package org.exampleClase;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -56,7 +57,7 @@ public class LambdaExercices {
     como resultado una coleccion de tamaño fijo con List.of
      */
 
-    public static List<String> listaInmutable = List.of("Jerónimo", "Duglas", "Caroina");
+    public static List<String> listaInmutable = List.of("Jerónimo", "Duglas", "Carolina");
 
     /*
     Object Ordering
@@ -68,8 +69,14 @@ public class LambdaExercices {
         Collections.sort(nombres);
         nombres.forEach(System.out::println);
     } */
+    public static void ejemploLambda1(List<String> nombres) {
+        // Creamos una copia local que SÍ se puede ordenar
+        List<String> copia = new ArrayList<>(nombres);
+        Collections.sort(copia);
+        copia.forEach(System.out::println);
+    }
 
-    public static void ejemploLambda2(List<Persona> personas) {
+    public static void ejemploLambdaCompareTo(List<Persona> personas) {
         // Tienes que pasarle el Comparator sí o sí porque el record no es "Comparable" por sí solo
         //Collections.sort(personas, Comparator.comparing(Persona::nombre));
         //Al añadir ell compareTo en la clase ahora podemos hacer :
