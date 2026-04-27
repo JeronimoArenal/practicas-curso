@@ -23,6 +23,8 @@ public class App {
         TraversingCollection.iteratorSeveralConditions(new ArrayList<>(listaDePersonas));
         TraversingCollection.eliminarMujeres(new ArrayList<>(listaDePersonas));
         LambdaExercices.ejemploLambda(new ArrayList<>(listaDePersonas));
+       // LambdaExercices.ejemploLambda1(LambdaExercices.listaInmutable);
+        LambdaExercices.ejemploLambda2(new ArrayList<>(listaDePersonas));
 
     }
 
@@ -121,6 +123,7 @@ public class App {
                 .segundoApellido("Villamizar")
                 .fechaNacimiento(LocalDate.of(1995, Month.APRIL, 15))
                 .genero(Genero.MASCULINO) // Asumiendo que Genero es un Enum
+                .salario((1500.00))
                 .build());
 
         personas.add(Persona.builder()
@@ -129,6 +132,7 @@ public class App {
                 .segundoApellido("Becerra")
                 .genero(Genero.FEMENINO)
                 .fechaNacimiento(LocalDate.of(2000, Month.OCTOBER, 10))
+                .salario((2500.00))
                 .build());
 
         personas.add(Persona.builder()
@@ -137,6 +141,7 @@ public class App {
                 .segundoApellido("González")
                 .fechaNacimiento(LocalDate.of(2005, Month.DECEMBER, 14))
                 .genero(Genero.FEMENINO)
+                .salario((3500.00))
                 .build());
 
         personas.add(Persona.builder()
@@ -145,6 +150,7 @@ public class App {
                 .segundoApellido("Gómez")
                 .fechaNacimiento(LocalDate.of(1989, Month.MAY, 22))
                 .genero(Genero.MASCULINO)
+                .salario((4500.00))
                 .build());
 
         // 3. Imprimir la lista
