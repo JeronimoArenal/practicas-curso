@@ -78,13 +78,26 @@ public class Main {
     // Este método acepta CUALQUIER servicio que maneje CUALQUIER cosa que extienda de Base.
     //  Esto es lo que se llama Polimorfismo con Genéricos. El método buscarYMostrar no sabe qué servicio le estás pasando,
     //   pero como sabe que cumple con el contrato de IBaseService, puede trabajar con él.
-    public static <T extends Base> void buscarYMostrar(IBaseService<T> servicio, String url) {
+/*    public static <T extends Base> void buscarYMostrar(IBaseService<T> servicio, String url) {
         T resultado = servicio.findByUrl(url);
         if (resultado != null) {
             System.out.println("[Busqueda Global] Encontrado: " + resultado.getName());
         } else {
             System.out.println("[Busqueda Global] No se encontró nada para la URL: " + url);
         }
+    }
+*/
+    //El método anterior con Switch Expression
+    public static <T extends Base> void buscarYMostrar(IBaseService<T> servicio, String url) {
+        T resultado = servicio.findByUrl(url);
+
+        switch (resultado) {
+            case null ->
+                    System.out.println("[Busqueda Global] No se encontró nada para la URL: " + url);
+
+            case T res ->
+                    System.out.println("[Busqueda Global] Encontrado: " + res.getName());
+        };
     }
 
 }
