@@ -5,12 +5,14 @@ import lombok.experimental.SuperBuilder;
 
 @Getter @Setter
 @ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
 //Al ser una clase abstracta, hereda los métodos de la Interface pero no está obligada a darles cuerpo.
 //Pasa la obligación a la primera clase (no abstracta). Si no lo fuese si estaría obligada a implementar todos los métodos
-public abstract class VehiculoAerero extends Vehiculo implements Flying{
+public abstract class VehiculoAereo extends Vehiculo implements Flying{
+    @EqualsAndHashCode.Exclude
     private int altitudActual;
     private int velocidadMaxima;
 

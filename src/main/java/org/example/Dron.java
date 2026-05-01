@@ -7,9 +7,10 @@ import java.util.StringJoiner;
 
 @Getter @Setter
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 //@ToString(callSuper = true)
 @SuperBuilder
-public final class Dron extends VehiculoAerero implements Cargable{
+public final class Dron extends VehiculoAereo implements Cargable{
     private int cantidadHelices;
     private int nivelBateria;
 

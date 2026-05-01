@@ -1,14 +1,12 @@
 package org.example;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Getter @Setter
 @ToString
+@EqualsAndHashCode
 @NoArgsConstructor
 @SuperBuilder // Permite que las hijas hereden el Builder y pasarle sus datos a las clases hijas.
 //Al ser abstract no se puede instanciar, solo sirve para que otras hereden de ella

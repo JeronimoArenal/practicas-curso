@@ -4,21 +4,24 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Optional;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Getter @Setter
 //@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
 //Declaramos los atributos únicos o métodos de Avion
-public class Avion extends VehiculoAerero{
+public class Avion extends VehiculoAereo {
     private String tipo;
     private int numeroMotores;
     private int numeroPasajeros;
-
+    {
+        System.out.println("Esto es un Bloque de Inicializacion qen la cllase Avión.Se utiliza cuando queremos ejecutar " +
+                "código antes del Constructor");
+    }
 
     //............................... Methods .........................................
     //el metodo volar() está en la clase padre por lo que no hay que implementarlo, aunque podriamos sobrescribirlo

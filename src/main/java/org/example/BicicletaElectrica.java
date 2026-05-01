@@ -1,5 +1,6 @@
 package org.example;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import java.util.StringJoiner;
 
 @Getter @Setter
 //@NoArgsConstructor // NO se puede utilizar con "final" escepto qye le demos un valor
+@AllArgsConstructor
 @SuperBuilder
 public final class BicicletaElectrica extends Bicicleta implements Cargable{
     private int nivelBateria;

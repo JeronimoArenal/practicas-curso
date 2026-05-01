@@ -6,7 +6,7 @@ import lombok.experimental.SuperBuilder;
 
 @Getter @Setter
 @SuperBuilder
-public final class Helicoptero extends VehiculoAerero {
+public final class Helicoptero extends VehiculoAereo {
     private int cantidadRotores;
 
 
