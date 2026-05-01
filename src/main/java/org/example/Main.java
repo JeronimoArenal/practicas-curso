@@ -1,8 +1,12 @@
 package org.example;
 
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
+
+        String nombreVehiculo = "My Avión";
 
         // Obtenemos la instancia del Singleton
         GestorVehiculoService gestor = GestorVehiculoService.get();
@@ -20,7 +24,7 @@ public class Main {
         Avion myAvion = Avion.builder()
                 .nombre("My Avión")   //Clase Abuelo - Vehiculo
                 .modelo("747-8")        //Clase Abuelo - Vehiculo
-                .fabricante("Boeing")   //Clase Abuelo - Vehiculo
+                .fabricante("Embraer")   //Clase Abuelo - Vehiculo
                 .velocidadMaxima(988)   //Clase Padre - VehiculoAereo
                 .numeroMotores(4)       //Clase Avion
                 .numeroPasajeros(410)   //Clase Avion
@@ -34,6 +38,7 @@ public class Main {
                 .fabricante("Embraer")   //Clase Abuelo - Vehiculo
                 .velocidadMaxima(258)   //Clase Padre - VehiculoAereo
                 .cantidadRotores(2)
+                .numeroMotores(3)
                 .build();
 
         // 3. Creamos un Dron tipo Clase, por lo que puede acceder a las variables de la clase
@@ -88,13 +93,35 @@ public class Main {
                 miBici
         );
 
-
-        //............................... Procesar la Flota  .....................................
+        //............................... Ordenar y Procesar la Flota  .....................................
+        gestor.ordenarPorNombreYFabricante();
         gestor.procesarFlota();
 
-        //............................... Búsqueda  .....................................
-        gestor.buscarPorNombre("SkyWatcher");
+        //............................... Búsqueda (true/false) .....................................
+        gestor.buscarPorNombre(nombreVehiculo);
 
+        //............................... Búsqueda devolviendo el objeto .................................
+        gestor.obtenerPorNombre(nombreVehiculo)
+                .ifPresent(v -> { // ¡Aquí sí puedes actuar sobre el objeto!
+                    //v.realizarAccionEspecial();
+                    v.toString();
+                    System.out.println("Vehículo recuperado: " + v.toString());
+                });
+//                .ifPresent(System.out::println);
+
+//............................... Mantenimiento con Interface Funcional .................................
+
+// Sustituimos todo el filtrado manual y el forEach por una sola llamada al Service:
+        gestor.realizarMantenimientoFiltrado(
+                // 1. EL FILTRO: ¿A quién? (Solo los que tienen +2 motores)
+                v -> v instanceof Motorizado m && m.getNumeroMotores() > 2,
+
+                // 2. LA ACCIÓN: ¿Qué les hacemos?
+                v -> "Limpieza profunda de sus " + ((Motorizado) v).getNumeroMotores() + " motores."
+        );
+
+        int total = gestor.obtenerVehiculosQueCumplen(v -> v instanceof Motorizado m && m.getNumeroMotores() > 2).size();
+        System.out.println("\nTotal de vehículos que han pasado la revisión: " + total);
     }
 
 }

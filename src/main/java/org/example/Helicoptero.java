@@ -6,8 +6,9 @@ import lombok.experimental.SuperBuilder;
 
 @Getter @Setter
 @SuperBuilder
-public final class Helicoptero extends VehiculoAereo {
+public final class Helicoptero extends VehiculoAereo implements Motorizado{
     private int cantidadRotores;
+    private int numeroMotores;
 
 
     //............................... Methods .........................................
@@ -29,10 +30,16 @@ public final class Helicoptero extends VehiculoAereo {
     }
 
     @Override
+    public int getNumeroMotores() {
+        return this.numeroMotores;
+    }
+
+    @Override
     public String toString() {
-        // super.toString() llama al toString de VehiculoAereo
-        // que a su vez llama al de Vehiculo (por el callSuper = true que hay allí)
-        return "[HELICÓPTERO] " + super.toString() + ", Rotores: " + cantidadRotores;
+        // Aprovechamos el numeroMotores también en el toString
+        return "[HELICÓPTERO] " + super.toString() +
+                ", Rotores: " + cantidadRotores +
+                ", Motores: " + numeroMotores;
     }
 
  /*   @Override ALL poner final en VehiculoAereo se delega la responsabilidad en este

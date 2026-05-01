@@ -1,7 +1,11 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class GestorVehiculoService {
 
@@ -30,13 +34,8 @@ public class GestorVehiculoService {
      *     }
      */
 
-
-
     //............................... Constructor privado .........................................
     private GestorVehiculoService() {}                               // Prohibimos que alguien haga 'new GestorVehiculo()'
-
-
-    //............................... M E T H O D S  .........................................
 
     //......................... Encargado de ciclo de vida de la UNICA instancia (Singleton) ........................
     public static GestorVehiculoService get() {
@@ -76,7 +75,7 @@ public class GestorVehiculoService {
         System.out.println("===========================\n");
     }
 
-    //............................... Buscador  .....................................
+    //............................... Buscador (true/false) .....................................
     public void buscarPorNombre(String nombre) {
         boolean existe = flota.stream()
                 .anyMatch(v -> v.getNombre().equalsIgnoreCase(nombre));
@@ -85,4 +84,47 @@ public class GestorVehiculoService {
         System.out.println(existe ? "Encontrado: " + nombre : "No hay rastro de: " + nombre);
     }
 
+    //.......................... Ordenar y comprar objetos con Comparator ......................
+    //ORDENAR
+    public void ordenarPorNombreYFabricante() {
+        flota.sort(Comparator
+                .comparing(Vehiculo::getNombre, String.CASE_INSENSITIVE_ORDER)
+                .thenComparing(Vehiculo :: getModelo)
+                .thenComparing(
+                        Comparator.comparing(Vehiculo::getFabricante).reversed())
+        );
+        System.out.println("Flota ordenada por nombre y fabricante.");
+    }
+
+    //COMPARAR NOMBRE
+    public boolean tienenMismoNombre(Vehiculo v1, Vehiculo v2) {
+        if (v1 == null || v2 == null) return false;
+        return v1.getNombre().equalsIgnoreCase(v2.getNombre());
+    }
+
+    //BUSCAR CONCRETO
+    public Optional<Vehiculo> obtenerPorNombre(String nombre) {
+        return flota.stream()
+                .filter(v -> v.getNombre().equalsIgnoreCase(nombre))
+                .findFirst(); // Devuelve el primer vehículo que coincida
+    }
+
+    // En GestorVehiculoService
+    public void realizarMantenimientoFiltrado(Predicate<Vehiculo> filtro, Mantenimiento tipoMantenimiento) {
+        System.out.println("--- INICIANDO PROTOCOLO DE MANTENIMIENTO SELECCIONADO ---");
+
+        flota.stream()
+                .filter(filtro) // Aquí aplicamos la condición (ej: que tenga +2 motores)
+                .forEach(v -> {
+                    String resultado = tipoMantenimiento.ejecutar(v);
+                    System.out.println(v.getNombre() + " (" + v.getFabricante() + "): " + resultado);
+                });
+    }
+
+    public List<Vehiculo> obtenerVehiculosQueCumplen(Predicate<Vehiculo> criterio) {
+        return flota.stream()
+                .filter(criterio) // filter() usa internamente la interfaz Predicate
+                .collect(Collectors.toList());
+    }
+    
 }

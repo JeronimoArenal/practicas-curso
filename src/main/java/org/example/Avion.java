@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 @SuperBuilder
 //Declaramos los atributos únicos o métodos de Avion
-public class Avion extends VehiculoAereo {
+public class Avion extends VehiculoAereo implements Motorizado{
     private String tipo;
     private int numeroMotores;
     private int numeroPasajeros;
