@@ -110,7 +110,7 @@ public class GestorVehiculoService {
     }
 
     // En GestorVehiculoService
-    public void realizarMantenimientoFiltrado(Predicate<Vehiculo> filtro, Mantenimiento tipoMantenimiento) {
+    public void realizarMantenimientoFiltrado(Predicate<Vehiculo> filtro, IMantenimiento tipoMantenimiento) {
         System.out.println("--- INICIANDO PROTOCOLO DE MANTENIMIENTO SELECCIONADO ---");
 
         flota.stream()
@@ -126,5 +126,5 @@ public class GestorVehiculoService {
                 .filter(criterio) // filter() usa internamente la interfaz Predicate
                 .collect(Collectors.toList());
     }
-    
+
 }

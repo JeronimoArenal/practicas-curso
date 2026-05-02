@@ -10,7 +10,7 @@ import java.util.StringJoiner;
 @EqualsAndHashCode(callSuper = true)
 //@ToString(callSuper = true)
 @SuperBuilder
-public final class Dron extends VehiculoAereo implements Cargable{
+public final class Dron extends VehiculoAereo implements ICargable {
     private int cantidadHelices;
     private int nivelBateria;
 

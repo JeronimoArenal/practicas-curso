@@ -1,12 +1,10 @@
 package org.example;
 
-import java.util.List;
+import java.util.function.Predicate;
 
 public class Main {
 
     public static void main(String[] args) {
-
-        String nombreVehiculo = "My Avión";
 
         // Obtenemos la instancia del Singleton
         GestorVehiculoService gestor = GestorVehiculoService.get();
@@ -98,6 +96,7 @@ public class Main {
         gestor.procesarFlota();
 
         //............................... Búsqueda (true/false) .....................................
+        String nombreVehiculo = "My Avión";
         gestor.buscarPorNombre(nombreVehiculo);
 
         //............................... Búsqueda devolviendo el objeto .................................
@@ -110,18 +109,22 @@ public class Main {
 //                .ifPresent(System.out::println);
 
 //............................... Mantenimiento con Interface Funcional .................................
+        final int MIN_MOTORES = 2;
 
-// Sustituimos todo el filtrado manual y el forEach por una sola llamada al Service:
+        // Definimos el filtro usando esa variable
+        Predicate<Vehiculo> filtroMotores = v -> v instanceof IMotorizado m && m.tieneMotores();
+
+        // Ejecutamos el mantenimiento
         gestor.realizarMantenimientoFiltrado(
-                // 1. EL FILTRO: ¿A quién? (Solo los que tienen +2 motores)
-                v -> v instanceof Motorizado m && m.getNumeroMotores() > 2,
-
-                // 2. LA ACCIÓN: ¿Qué les hacemos?
-                v -> "Limpieza profunda de sus " + ((Motorizado) v).getNumeroMotores() + " motores."
+                filtroMotores,
+                v -> "Limpieza profunda de sus " + ((IMotorizado) v).getNumeroMotores() + " motores."
         );
 
-        int total = gestor.obtenerVehiculosQueCumplen(v -> v instanceof Motorizado m && m.getNumeroMotores() > 2).size();
-        System.out.println("\nTotal de vehículos que han pasado la revisión: " + total);
+        // Obtenemos el total (que será coherente con el filtro de arriba)
+        int total = gestor.obtenerVehiculosQueCumplen(filtroMotores).size();
+
+        System.out.println("\nTotal de vehículos con más de " + MIN_MOTORES + " motores revisados: " + total);
+
     }
 
 }

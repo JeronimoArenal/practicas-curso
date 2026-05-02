@@ -1,6 +1,6 @@
 package org.example;
 
-public interface Flying {
+public interface IFlying {
     void despegar();
     void aterrizar();
     void volar(int altitud);

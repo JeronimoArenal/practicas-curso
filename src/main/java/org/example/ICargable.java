@@ -1,6 +1,6 @@
 package org.example;
 
-public interface Cargable {
+public interface ICargable {
     void cargarBateria(int porcentaje);
     int getNivelBateria();
 }

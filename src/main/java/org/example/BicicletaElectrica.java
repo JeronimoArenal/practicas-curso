@@ -2,7 +2,6 @@ package org.example;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
@@ -12,7 +11,7 @@ import java.util.StringJoiner;
 //@NoArgsConstructor // NO se puede utilizar con "final" escepto qye le demos un valor
 @AllArgsConstructor
 @SuperBuilder
-public final class BicicletaElectrica extends Bicicleta implements Cargable{
+public final class BicicletaElectrica extends Bicicleta implements ICargable {
     private int nivelBateria;
     private final String modeloMotor;
 
